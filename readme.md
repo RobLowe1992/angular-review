@@ -4,27 +4,27 @@ Let's build an Angular app from scratch!
 
 ## Outline of Steps
   0. 'Bootstrapping' our Angular app
-    0. Create application files `index.html`, `script.js`
+    0. Create application files `index.html` and `script.js`
     0. Bring in Angular codebase from a CDN
     0. Define a `module` on the `angular` object
     0. Link this module using the directive `ng-app`
   0. Data & Template-binding
     0. Create an array of hard-coded data in `app.js`
     0. Define a `controller` on the `angular` object
-    0. Define the `controller`'s controller function (callback function)
+    0. Define the `controller's`  function (callback function)
     0. Define a property on the ControllerFunction
-      - > e.g. `this.todos = todosArray`
+      - e.g. `this.todos = todosArray`
     0. Bind the controller to a DOM element in `index.html` using the directive `ng-controller`
-    0. Use the directive `ng-repeat` to iterate over the collection in `vm.todos`.
-  0. Replacing `ng-controller` with `state` from ui-router
+    0. Use the directive `ng-repeat` to iterate over the collection in `vm.todos`
+  0. Replace `ng-controller` with `state` from ui-router
     0. Remove `ng-controller` directive
     0. Bring in `ui.router` from a CDN
     0. Inject `ui.router` in the `modules` array of dependencies
-    0. Define a `config` on the module: this both will inject `$stateProvider` and reference the `RouterFunction`
-    0. Define your `RouterFunction`, injecting `$stateProvider`.
+    0. Define a `config` on the module. This will both inject `$stateProvider` and reference the `RouterFunction`
+    0. Define your `RouterFunction`, injecting `$stateProvider`
     0. Add one `state` onto `$stateProvider`
     0. Add a new template `todos-index.html`
-    0. Add `ui-vew` to `<main>`
+    0. Add `ui-view` to `<main>`
 
 ## Step 1: Setup
 
@@ -33,7 +33,7 @@ Let's build an Angular app from scratch!
  $ touch index.html app.js
 ```
 
-Let's add in some HTML boilerplate!
+Let's add in some HTML boilerplate.
 
 > in `index.html`:
 
@@ -52,7 +52,7 @@ Let's add in some HTML boilerplate!
   </html>
 ```
 
-Next, we'll add in the Angular codebase from a CDN, and then add a `module` to the `angular` object. If it seems odd that there is an `angular` object, think back to `jQuery`/`$`: it's the same idea of a library/framework being encapsulated in a single, imported object.
+Next, we'll add in the Angular codebase from a CDN, and then add a `module` to the `angular` object. If it seems odd that there is an `angular` object. Think back to `jQuery`/`$`. It's the same idea of a library/framework being encapsulated in a single, imported object.
 
 > in app.js:
 
@@ -168,9 +168,9 @@ function RouterFunction($stateProvider){
 
 What is a state doing here? It's binding a controller to a template, and making that binding available at a route, in this case `/`.
 
-We haven't yet made the new template `todos-index.html`, so let's do that.
+We haven't yet made the new template `todos-index.html` so let's do that.
 
-Now, we'll cut this html from `index.html` and paste it to `todos-index.html`:
+Now, we'll cut this HTML from `index.html` and paste it to `todos-index.html`.
 
 >
 ```html
