@@ -120,14 +120,14 @@ And finally let's bind the controller to a template (`index.html`). Template-bin
 
 ```html
 <body ng-app="todosAgain">
-  <!-- replace ... with the name of the controller -->
-  <main ng-controller="...">
+  <!-- we're creating a new instance of our controller and saving it to a variable vm -->
+  <main ng-controller="TodosController as vm">
 
   </main>
 </body>
 ```
 
-> inside the <main>:
+> inside the main tag :
 
 ```html
 <div ng-repeat="todo in vm.todos">
