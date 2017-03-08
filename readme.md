@@ -190,4 +190,4 @@ Then, we'll remove `ng-controller` and replace it with `ui-view`:
 
 </main>
 ```
-Run your server by typing in `hs`. Open your browser to `http://localhost:8080/#/` and voila!
+Run your server by typing `hs` in the terminal. Open your browser to `http://localhost:8080/#/` and voila!
