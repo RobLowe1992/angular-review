@@ -1,62 +1,190 @@
 # Angular Review
 
-| An Angular | ...        | is (sort-of) like a Rails | ...       |
-|------------|------------|-----------------|---------------------|
-|            | module     |                 | gem                 |
-|            | controller |                 | controller's action |
-|            | resource   |                 | model               |
-|            | ng-model   |                 | model's field       |
-|            | directive  |                 | helper              |
-|            | service    |                 | ActiveRecord::Base  |
-|            | view       |                 | view                |
+Let's build an Angular app from scratch!
 
-## Angular on Rails...?
+## Outline of Steps
+  0. 'Bootstrapping' our Angular app
+    0. Create application files `index.html`, `script.js`
+    0. Bring in Angular codebase from a CDN
+    0. Define a `module` on the `angular` object
+    0. Link this module using the directive `ng-app`
+  0. Data & Template-binding
+    0. Create an array of hard-coded data in `app.js`
+    0. Define a `controller` on the `angular` object
+    0. Define the `controller`'s controller function (callback function)
+    0. Define a property on the ControllerFunction
+      - > e.g. `this.todos = todosArray`
+    0. Bind the controller to a DOM element in `index.html` using the directive `ng-controller`
+    0. Use the directive `ng-repeat` to iterate over the collection in `vm.todos`.
+  0. Replacing `ng-controller` with `state` from ui-router
+    0. Remove `ng-controller` directive
+    0. Bring in `ui.router` from a CDN
+    0. Inject `ui.router` in the `modules` array of dependencies
+    0. Define a `config` on the module: this both will inject `$stateProvider` and reference the `RouterFunction`
+    0. Define your `RouterFunction`, injecting `$stateProvider`.
+    0. Add one `state` onto `$stateProvider`
+    0. Add a new template `todos-index.html`
+    0. Add `ui-vew` to `<main>`
 
-Angular is all about rendering multiple views.
+## Step 1: Setup
 
-Rails can also render multiple views.
-
-However, in Rails going to a new view requires a page refresh. Angular doesn't require page refreshes. This conserves a considerable amount of memory and time.
-
-An app incorporating both Rails and Angular should divide the responsibilities accordingly. Views rendered by Rails should be the "main" views with `<script>` and `<link>` tags. Views rendered by Angular should compose the content of those main views.
-
-In this way, each view rendered by Rails is effectively its own single-page app.
-
-For example, if the GA website was made with Rails and Angular, there might be 3 views rendered by Rails. The file structure might look something like this:
-
-```
-app/ 
-  views/
-    classes/
-      index.html.erb
-    students/
-      index.html.erb
-    instructors/
-      index.html.erb
-  assets/
-    javascripts/
-      application.js
-      classes/
-        directives/
-        views/
-        controllers/
-      students/
-        directives/
-        views/
-        controllers/
-      instructors/
-        directives/
-        views/
-        controllers/
+```bash
+ $ mkdir angular_practice
+ $ touch index.html app.js
 ```
 
-`classes/index.html.erb` would contain all the `<script>` tags necessary for Angular to display that page.
+Let's add in some HTML boilerplate!
 
-One advantage here is that the user does not need to re-load all the external .js and .css files any time they go to a view within the "classes" mini-app, as they would if Rails was rendering the view rather than Angular. This is because Angular is just swapping out what's inside the `<body>` of the page, not what's in the `<head>`.
+> in `index.html`:
 
-Additionally, the user has a more seamless experience. They do not experience a page refresh between each view change within the "classes" mini-app.
+```HTML
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title></title>
+      <!-- Bring in Angular CDN here -->
+      <script src="app.js"></script>
+    </head>
+    <body>
 
-This also means the user's browser has in memory only the scripts necessary to show the "classes" mini-app when using it, and only the scripts necessary to show the "students" mini-app when using *that*: rather than including *all* of the Javascripts in the `application.html.erb`, we'd only include `application.js` and maybe `angular.min.js` there, and all the directives, views, and controllers for classes only on the `classes/index.html.erb` page, and so on for students and instructors.
+    </body>
+  </html>
+```
 
-In this way, Rails renders the "big" views and Angular renders the "little" views. The app is one big app made up of a bunch of smaller apps, each based on an `index.html.erb` that is loaded by Rails but ultimately rendered by Angular.
+Next, we'll add in the Angular codebase from a CDN, and then add a `module` to the `angular` object. If it seems odd that there is an `angular` object, think back to `jQuery`/`$`: it's the same idea of a library/framework being encapsulated in a single, imported object.
 
+> in app.js:
+
+```js
+angular
+  .module("todosAgain",[])
+```
+
+> in index.html:
+
+```HTML
+<body ng-app="todosAgain">
+  {{3/0}}
+</body>
+```
+
+## Step 2: Adding the Controller
+
+Since Controllers distribute data and an application's business logic, let's add in some hard-coded data.
+
+> in app.js
+
+```js
+let todosData = [
+  {
+    task: "Grind out Angular apps all day so I can stack $stacks",
+    completed: true
+  },
+  {
+    task: "Order 500lbs of Cheetos with this Angular-dev paycheck",
+    completed: false
+  },
+  {
+    task: "Monetize my meme-stream",
+    completed: true
+  },
+  {
+    task: "Create Machine Learning platform optimized for dank memes",
+    completed: false
+  }
+]
+```
+
+Next, we will add a `controller` onto the `angular` object.
+
+> in app.js
+
+```js
+angular
+  .module("todosAgain",[])
+  .controller("TodosController", TodosControllerFunction)
+```
+
+We'll also have to define the `TodosControllerFunction`.
+
+```js
+function TodosControllerFunction(){
+  this.todos = todosData;
+}
+```
+
+And finally let's bind the controller to a template (`index.html`). Template-binding is simply attaching a controller to a template. We will do this using `ng-controller`. Let's add in a `<main></main>` and bind the controller to it.
+
+> in index.html
+
+```html
+<body ng-app="todosAgain">
+  <!-- replace ... with the name of the controller -->
+  <main ng-controller="...">
+
+  </main>
+</body>
+```
+
+> inside the <main>:
+
+```html
+<div ng-repeat="todo in vm.todos">
+  {{todo.task}}
+</div>
+```
+
+## Step 3: Bringing in UI Router
+
+First, we'll grab UI Router from a CDN and bring it into our application.
+
+Next, we'll add a `config` to the `angular` object.
+
+
+```js
+angular
+  .module("todosAgain",[])
+  .config([
+    "$stateProvider",
+     RouterFunction
+   ])
+  .controller("TodosController", TodosControllerFunction)
+```
+
+Next, we'll define `RouterFunction`:
+
+```js
+function RouterFunction($stateProvider){
+  $stateProvider
+    .state("todosIndex", {
+      url: "/",
+      templateUrl: "todos-index.html",
+      controller: "TodosController",
+      controllerAs: "vm"
+    })
+}
+```
+
+What is a state doing here? It's binding a controller to a template, and making that binding available at a route, in this case `/`.
+
+We haven't yet made the new template `todos-index.html`, so let's do that.
+
+Now, we'll cut this html from `index.html` and paste it to `todos-index.html`:
+
+>
+```html
+<div ng-repeat="todo in vm.todos">
+  {{todo.task}}
+</div>
+```
+
+Then, we'll remove `ng-controller` and replace it with `ui-view`:
+
+```HTML
+<main ui-view>
+
+</main>
+```
+
+Voila!
