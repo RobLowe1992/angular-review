@@ -144,12 +144,16 @@ Next, we'll add a `config` to the `angular` object.
 
 ```js
 angular
-  .module("todosAgain",[])
+  .module("todosAgain",["ui.router"])
   .config([
     "$stateProvider",
      RouterFunction
    ])
-  .controller("TodosController", TodosControllerFunction)
+  .controller("TodosController",  ["$stateParams", TodosControllerFunction])
+
+  function TodosControllerFunction($state, $stateParams){
+  this.todos = todosData;
+}
 ```
 
 Next, we'll define `RouterFunction`:
@@ -186,5 +190,4 @@ Then, we'll remove `ng-controller` and replace it with `ui-view`:
 
 </main>
 ```
-
-Voila!
+Run your server by typing in `hs`. Open your browser to `http://localhost:8080/#/` and voila!
