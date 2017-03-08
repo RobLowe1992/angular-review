@@ -2,13 +2,6 @@
 
 Let's build an Angular app from scratch!
 
-## Setup
-
-```bash
- $ mkdir angular_practice
- $ touch index.html app.js
-```
-
 ## Outline of Steps
   0. 'Bootstrapping' our Angular app
     0. Create application files `index.html`, `script.js`
@@ -34,6 +27,11 @@ Let's build an Angular app from scratch!
     0. Add `ui-vew` to `<main>`
 
 ## Step 1: Setup
+
+```bash
+ $ mkdir angular_practice
+ $ touch index.html app.js
+```
 
 Let's add in some HTML boilerplate!
 
