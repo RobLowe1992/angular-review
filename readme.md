@@ -69,6 +69,8 @@ angular
 </body>
 ```
 
+Now, open `index.html`
+
 ## Step 2: Adding the Controller
 
 Since Controllers distribute data and an application's business logic, let's add in some hard-coded data.
