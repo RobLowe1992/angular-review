@@ -139,7 +139,7 @@ And finally let's bind the controller to a template (`index.html`). Template-bin
 
 ## Step 3: Bringing in UI Router
 
-First, we'll grab UI Router from a CDN and bring it into our application.
+First, we'll grab UI Router from a CDN and bring it into our application. UI Router is a client-side single page application routing framework that updates the browser's URL as the user navigates through the application.
 
 Next, we'll add a `config` to the `angular` object and update our controller function. A state in Angular is basically a route: it's an umbrella term for a URL, the view associated with it, and any controllers used in that view.
 
