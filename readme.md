@@ -3,28 +3,29 @@
 Let's build an Angular app from scratch!
 
 ## Outline of Steps
-  0. 'Bootstrapping' our Angular app
-    0. Create application files `index.html` and `script.js`
-    0. Bring in Angular codebase from a CDN
-    0. Define a `module` on the `angular` object
-    0. Link this module using the directive `ng-app`
-  0. Data & Template-binding
-    0. Create an array of hard-coded data in `app.js`
-    0. Define a `controller` on the `angular` object
-    0. Define the `controller's`  function (callback function)
-    0. Define a property on the ControllerFunction
-      - e.g. `this.todos = todosArray`
-    0. Bind the controller to a DOM element in `index.html` using the directive `ng-controller`
-    0. Use the directive `ng-repeat` to iterate over the collection in `vm.todos`
-  0. Replace `ng-controller` with `state` from ui-router
-    0. Remove `ng-controller` directive
-    0. Bring in `ui.router` from a CDN
-    0. Inject `ui.router` in the `modules` array of dependencies
-    0. Define a `config` on the module. This will both inject `$stateProvider` and reference the `RouterFunction`
-    0. Define your `RouterFunction`, injecting `$stateProvider`
-    0. Add one `state` onto `$stateProvider`
-    0. Add a new template `todos-index.html`
-    0. Add `ui-view` to `<main>`
+
+  1. 'Bootstrapping' our Angular app
+      1. Create application files `index.html` and `script.js`
+      1. Bring in Angular codebase from a CDN
+      1. Define a `module` on the `angular` object
+      1. Link this module using the directive `ng-app`
+  1. Data & Template-binding
+      1. Create an array of hard-coded data in `app.js`
+      1. Define a `controller` on the `angular` object
+      1. Define the `controller's`  function (callback function)
+      1. Define a property on the ControllerFunction
+          - e.g. `this.todos = todosArray`
+      1. Bind the controller to a DOM element in `index.html` using the directive `ng-controller`
+      1. Use the directive `ng-repeat` to iterate over the collection in `vm.todos`
+  1. Replace `ng-controller` with `state` from ui-router
+      1. Remove `ng-controller` directive
+      1. Bring in `ui.router` from a CDN
+      1. Inject `ui.router` in the `modules` array of dependencies
+      1. Define a `config` on the module. This will both inject `$stateProvider` and reference the `RouterFunction`
+      1. Define your `RouterFunction`, injecting `$stateProvider`
+      1. Add one `state` onto `$stateProvider`
+      1. Add a new template `todos-index.html`
+      1. Add `ui-view` to `<main>`
 
 ## Step 1: Setup
 
@@ -192,4 +193,5 @@ Then, we'll remove `ng-controller` and replace it with `ui-view`:
 
 </main>
 ```
+
 Run your server by typing `hs` in the terminal. Open your browser to `http://localhost:8080/#/` and voila!
