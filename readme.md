@@ -2,6 +2,10 @@
 
 Let's build an Angular app from scratch!
 
+## Troubleshooting
+
+Refer to [this list of common errors in Angular](./angular-gotchas.md) if you get stuck.
+
 ## Outline of Steps
 
   1. 'Bootstrapping' our Angular app
@@ -21,7 +25,8 @@ Let's build an Angular app from scratch!
       1. Remove `ng-controller` directive
       1. Bring in `ui.router` from a CDN
       1. Inject `ui.router` in the `modules` array of dependencies
-      1. Define a `config` on the module. This will both inject `$stateProvider` and reference the `RouterFunction`
+      1. Attach a `config` method to the `module`.
+          - The arguments to `config` inject `$stateProvider` and reference the `RouterFunction`
       1. Define your `RouterFunction`, injecting `$stateProvider`
       1. Add one `state` onto `$stateProvider`
       1. Add a new template `todos-index.html`
@@ -36,7 +41,7 @@ Let's build an Angular app from scratch!
 
 Let's add in some HTML boilerplate.
 
-> in `index.html`:
+> in `index.html`...
 
 ```HTML
   <!DOCTYPE html>
@@ -55,14 +60,14 @@ Let's add in some HTML boilerplate.
 
 Next, we'll add in the Angular codebase from a CDN, and then add a `module` to the `angular` object. If it seems odd that there is an `angular` object. Think back to `jQuery`/`$`. It's the same idea of a library/framework being encapsulated in a single, imported object.
 
-> in app.js:
+> in app.js...
 
 ```js
 angular
   .module("todosAgain",[])
 ```
 
-> in index.html:
+> in index.html...
 
 ```HTML
 <body ng-app="todosAgain">
@@ -76,7 +81,7 @@ Now, open `index.html`
 
 Since Controllers distribute data and an application's business logic, let's add in some hard-coded data.
 
-> in app.js
+> in app.js...
 
 ```js
 let todosData = [
@@ -101,7 +106,7 @@ let todosData = [
 
 Next, we will add a `controller` onto the `angular` object.
 
-> in app.js
+> in app.js...
 
 ```js
 angular
@@ -119,7 +124,7 @@ function TodosControllerFunction(){
 
 And finally let's bind the controller to a template (`index.html`). Template-binding is simply attaching a controller to a template. We will do this using `ng-controller`. Let's add in a `<main></main>` and bind the controller to it.
 
-> in index.html
+> in index.html...
 
 ```html
 <body ng-app="todosAgain">
@@ -130,7 +135,7 @@ And finally let's bind the controller to a template (`index.html`). Template-bin
 </body>
 ```
 
-> inside the main tag :
+> inside the main tag...
 
 ```html
 <div ng-repeat="todo in vm.todos">
@@ -159,7 +164,7 @@ angular
 }
 ```
 
-Next, we'll define `RouterFunction`:
+Next, we'll define `RouterFunction`...
 
 ```js
 function RouterFunction($stateProvider){
@@ -186,7 +191,7 @@ Now, we'll cut this HTML from `index.html` and paste it to `todos-index.html`.
 </div>
 ```
 
-Then, we'll remove `ng-controller` and replace it with `ui-view`:
+Then, we'll remove `ng-controller` and replace it with `ui-view`...
 
 ```HTML
 <main ui-view>
